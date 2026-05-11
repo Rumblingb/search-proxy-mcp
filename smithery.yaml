@@ -1,0 +1,10 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      apiKey:
+        type: string
+        description: "API key for Pro tier (unlimited queries)"
+  commandFunction: |
+    (config) => ({command: 'python3', args: ['server.py', '--api-key', config.apiKey]})
