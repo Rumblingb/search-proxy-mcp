@@ -1,4 +1,6 @@
-# Search Proxy MCP — Web Search for AI Agents
+#      1|# Search Proxy MCP — Web Search for AI Agents
+
+[![smithery badge](https://smithery.ai/badge/vishar-rumbling/search-proxy-mcp)](https://smithery.ai/servers/vishar-rumbling/search-proxy-mcp)
 
 AI-powered web search via DuckDuckGo (free, no API key needed). Your AI agent can search the web, find news, and read page content — all through MCP protocol.
 
