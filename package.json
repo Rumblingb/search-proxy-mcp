@@ -1,21 +1,18 @@
-{
-  "name": "agentpay-search-proxy-mcp",
-  "version": "1.2.0",
-  "description": "MCP server: Web search for AI agents via DuckDuckGo with rate limiting + Pro tier",
-  "main": "server.py",
-  "keywords": [
-    "mcp",
-    "mcp-server",
-    "ai-agent",
-    "search",
-    "web-search",
-    "agentpay"
-  ],
+﻿{
+  "name": "search-proxy-mcp",
+  "version": "1.0.0",
+  "description": "Web search for AI agents via DuckDuckGo. Free tier.",
+  "main": "index.js",
+  "bin": {
+    "search-proxy-mcp": "./index.js"
+  },
+  "keywords": ["mcp","search","proxy","agentpay","duckduckgo"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rumblingb/search-proxy-mcp.git"
   },
   "homepage": "https://rumblingb.github.io/search-proxy-mcp/",
   "author": "AgentPay Labs",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
