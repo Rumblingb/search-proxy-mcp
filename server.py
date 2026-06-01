@@ -7,11 +7,10 @@ Usage:
 """
 
 import json, re, urllib.parse, sys, os, time, collections
-from mcp.server.lowlevel import Server
-from mcp.server.stdio import stdio_server
+from mcp.server.fastmcp import FastMCP
 import httpx
 
-server = Server("search-proxy-mcp")
+server = FastMCP("search-proxy-mcp")
 DDG_BASE = "https://duckduckgo.com"
 DDG_API = "https://api.duckduckgo.com"
 
@@ -100,14 +99,6 @@ async def _ddg_html(query, max_results=10):
 @server.tool(
     name="search_web",
     description="Search the web for information. Returns instant answers and organic results. Free tier: 50 calls.",
-    input_schema={
-        "type": "object",
-        "properties": {
-            "query": {"type": "string", "description": "Search query"},
-            "max_results": {"type": "integer", "description": "Max results (1-20)", "default": 5}
-        },
-        "required": ["query"]
-    }
 )
 async def search_web(query: str, max_results: int = 5) -> str:
     limit_check = check_rate_limit()
@@ -135,14 +126,6 @@ async def search_web(query: str, max_results: int = 5) -> str:
 @server.tool(
     name="search_news",
     description="Search recent news using DuckDuckGo. Free tier: 50 calls.",
-    input_schema={
-        "type": "object",
-        "properties": {
-            "query": {"type": "string", "description": "News search query"},
-            "max_results": {"type": "integer", "default": 5}
-        },
-        "required": ["query"]
-    }
 )
 async def search_news(query: str, max_results: int = 5) -> str:
     limit_check = check_rate_limit()
@@ -171,14 +154,6 @@ async def search_news(query: str, max_results: int = 5) -> str:
 @server.tool(
     name="search_get_page_content",
     description="Fetch and extract readable text content from a URL. Free tier: 50 calls.",
-    input_schema={
-        "type": "object",
-        "properties": {
-            "url": {"type": "string", "description": "URL to fetch"},
-            "max_chars": {"type": "integer", "description": "Max characters to return", "default": 5000}
-        },
-        "required": ["url"]
-    }
 )
 async def search_get_page_content(url: str, max_chars: int = 5000) -> str:
     limit_check = check_rate_limit()
@@ -203,12 +178,5 @@ async def search_get_page_content(url: str, max_chars: int = 5000) -> str:
     except Exception as e:
         return json.dumps({"error": str(e), "isError": True}, indent=2)
 
-def main():
-    import anyio
-    async def run():
-        async with stdio_server() as streams:
-            await server.run(streams[0], streams[1], server.create_initialization_options())
-    anyio.run(run)
-
 if __name__ == "__main__":
-    main()
+    server.run(transport='stdio')
