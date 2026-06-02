@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 // search-proxy-mcp — npm wrapper that spawns the Python MCP server
 const { spawn } = require('child_process');
 const path = require('path');
