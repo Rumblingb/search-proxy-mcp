@@ -1,14 +1,6 @@
+runtime: "container"
 startCommand:
-  type: stdio
-  configSchema:
-    type: object
-    properties:
-      proKey:
-        type: string
-        description: "Pro key (PROL_XXX) for unlimited queries. Buy at https://buy.stripe.com/5kQ3cxflRabW9PW1AD1oI0r"
-  commandFunction: |
-    (config) => {
-      const args = ['server.py'];
-      if (config.proKey) { args.push('--pro-key', config.proKey); }
-      return {command: 'python3', args: args};
-    }
+  type: "stdio"
+  command: "node"
+  args: ["index.js"]
+description: "Web search your agent can't get rate-limited off of. DuckDuckGo under the hood, throttling handled, zero API-key signup to start."
